@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore Arinno's industrial and cleaning equipment repair services including diagnostics, fabrication, maintenance, and emergency field support."
+    />
+    <title>Services | Arinno's Industrial Repair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="service-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="container header-inner">
+          <a class="brand" href="index.html" aria-label="Arinno's Cleaning Equipment Repair home">
+            <span class="brand-mark">A</span>
+            <span class="brand-copy">
+              <strong>Arinno's</strong>
+              <small>Cleaning Equipment Repair</small>
+            </span>
+          </a>
+
+          <nav class="main-nav" aria-label="Main navigation">
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+
+          <div class="header-actions">
+            <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+              <span class="theme-dot"></span>
+              <span class="theme-label">Steel</span>
+            </button>
+            <a class="button button-primary" href="contact.html">Request Service</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+       
+
+        <section class="section-spacing" id="services">
+          <div class="container">
+            <div class="section-heading narrow">
+              <p class="eyebrow">Service solutions</p>
+              <h2>Schedule a service.</h2>
+            </div>
+
+            <div class="service-feature">
+              <div class="service-feature-image"></div>
+              <div class="service-view" id="service-view"></div>
+            </div>
+          </div>
+        </section>
+
+      
+
+        <section class="schedule-section section-spacing" id="contact">
+          <div class="container schedule-grid">
+            <div class="schedule-copy">
+              <p class="eyebrow">Ready to schedule service?</p>
+              <h2>Let’s get your equipment back to work.</h2>
+              <p>Send your contact details and equipment information, and we’ll email your request directly to Arinno’s cleaning equipment repair team.</p>
+            </div>
+
+            <form class="service-form" id="service-form">
+              <div class="form-row two-up">
+                <label>
+                  Full name
+                  <input type="text" name="fullName" placeholder="Your name" required />
+                </label>
+                <label>
+                  Company
+                  <input type="text" name="company" placeholder="Business name" />
+                </label>
+              </div>
+
+              <div class="form-row two-up">
+                <label>
+                  Phone
+                  <input type="tel" name="phone" placeholder="(555) 123-4567" required />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" placeholder="you@example.com" required />
+                </label>
+              </div>
+
+              <label>
+                Equipment needing service
+                <input type="text" name="equipment" placeholder="Floor scrubber, sweeper, extractor, etc." required />
+              </label>
+
+              <label>
+                Service details
+                <textarea name="message" rows="5" placeholder="Tell us what is happening with the equipment and any urgency." required></textarea>
+              </label>
+
+              <button type="submit" class="button button-primary">Send Service Request</button>
+              <p id="form-status" class="form-status" aria-live="polite"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <div>
+            <a class="brand footer-brand" href="index.html">
+              <span class="brand-mark">A</span>
+              <span class="brand-copy">
+                <strong>Arinno's</strong>
+                <small>Cleaning Equipment Repair</small>
+              </span>
+            </a>
+          </div>
+          <div class="footer-links">
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-contact">
+            <a href="tel:+19166012992">(916) 601-2992</a>
+            <a href="mailto:jparinno@gmail.com">jparinno@gmail.com</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="site-config.js"></script>
+    <script src="script.js"></script>
+    <script>
+      const services = [
+        {
+          id: 'Types of cleaning equipment',
+          name: 'Types of cleaning equipment',
+          summary: 'Arrange a service appointment for your equipment.',
+          description: 'We service floor scrubbers, sweepers, extractors, vacuums, pressure washers, burnishers, and more.',
+          bullets: ['Floor scrubbers', 'Commercial sweepers', 'Carpet extractors', 'Vacuum cleaners', 'Pressure washers', 'Burnishers', 'and all other types of cleaning equipment'],
+        },
+      ];
+
+      const serviceView = document.getElementById('service-view');
+
+      function renderServices() {
+        renderSelectedService(services[0]);
+      }
+
+      function renderSelectedService(service) {
+        serviceView.innerHTML = `
+          <div class="service-detail-panel">
+            <div class="service-detail-header">
+              <div>
+                <p class="eyebrow">Service request</p>
+                <h3>${service.name}</h3>
+              </div>
+            </div>
+            <p class="service-detail-summary">${service.description}</p>
+            <ul class="service-list">
+              ${service.bullets.map((item) => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }
+
+      document.getElementById('service-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const fullName = formData.get('fullName');
+        const company = formData.get('company') || 'Not provided';
+        const phone = formData.get('phone');
+        const email = formData.get('email');
+        const equipment = formData.get('equipment');
+        const message = formData.get('message');
+
+        const subject = encodeURIComponent(`Service Request: ${equipment}`);
+        const body = encodeURIComponent(
+          `Name: ${fullName}\nCompany: ${company}\nPhone: ${phone}\nEmail: ${email}\nEquipment: ${equipment}\n\nService Details:\n${message}`
+        );
+
+        window.location.href = `mailto:jparinno@gmail.com?subject=${subject}&body=${body}`;
+        document.getElementById('form-status').textContent = 'Your email client is opening with your service request.';
+        this.reset();
+      });
+
+      renderServices();
+    </script>
+  </body>
+</html>
